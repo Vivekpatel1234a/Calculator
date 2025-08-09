@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; 
+    
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+background: linear-gradient(349deg, #081c4ef7 0%, #000000d6 50%, #284a84f2 100%)
+
+
+
+}
+.container{
+    min-height: 180px;
+   border-radius: 7px;
+   box-shadow:1px 2px 20px 5px rgb(0 215 255 / 36%);
+}
+.row{
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 10px 0 10px;
+}
+
+.row>li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   background-color: rgb(68, 68, 68);
+   color: white;
+   font-size: 17px;
+    margin: 3px;
+    padding: 3px;
+    min-height: 40px;
+    min-width: 40px;
+    height: 4em;
+    width: 4em;
+    border-radius: 29%;
+}
+.outputregion{
+    width: 88%;
+    height: 60px;
+    margin: 10px 5px 10px 5px;
+    display: flex;
+    align-self: center;
+    justify-self: center;
+    box-shadow: 0px 0px 4px 1px rgb(229, 255, 0);
+}
+li{
+    cursor: pointer;
+    box-shadow: 0px 0px 1px 1px rgb(0, 196, 255, 0.55);
+}
+li.gr{
+     background-color: rgb(152, 151, 151);
+}
+
+  li.ora{
+        background-color: rgb(255, 140, 0);
+    }
+ul>li:active{
+    opacity: 0.9;
+}
+input{
+    outline: none;
+    font-size: 25px;
+    border: none;
+    padding: 3px;
+    border-radius: 5px;
+   text-align: end;
+
+}
+</style>
+</head>
+<body>
+    <div class="container" style="background-color: rgb(31 29 29);">
+        
+        <input type="text" placeholder="" class="outputregion">
+       <ul class="row1 row">
+        <li class="gr">AC</li>
+        <li class="gr">%</li>
+        <li class="gr">C</li>
+        <li class="ora">/</li>
+       </ul>
+       <ul class="row2 row">
+         <li>7</li>
+         <li>8</li>
+         <li>9</li>
+         <li class="ora">*</li>
+       </ul>
+       <ul class="row3 row">
+           <li>4</li>
+           <li>5</li>
+           <li>6</li>
+           <li class="ora">-</li>
+       </ul>
+       <ul class="row4 row">
+           <li>1</li>
+           <li>2</li>
+           <li>3</li>
+           <li class="ora">+</li>
+       </ul>
+       <ul class="row5 row">
+           <li>00</li>
+           <li>0</li>
+           <li>.</li>
+           <li class="ora">=</li>
+       </ul>
+    </div>
+
+
+
+    <script>
+        let tbtn = document.querySelectorAll('li')
+        let output = document.querySelector('.outputregion');
+        tbtn.forEach(element => {
+            element.addEventListener('click',(e)=>{
+                let value = e.target.innerText;
+                
+                if(value=== 'AC'){
+                    output.value = '';
+                }
+               else if(value === 'C'){
+                    output.value = output.value.slice(0,output.value.length-1)
+                }
+                else if (value === '=') {
+                try {
+                   let result = eval(output.value);
+                   output.value = Number(result.toFixed(10)); // 10 decimal tak round, fir Number se extra 0 hata
+                } catch {
+                   output.value = "Error";
+                }
+               }
+
+              else {
+            // Error ke baad koi bhi normal value aati hai → reset first
+            if (output.value === "Error") {
+                output.value = '';
+            }
+            output.value += value;
+        }
+            })
+        });
+        
+
+    </script>
+</body>
+</html>
